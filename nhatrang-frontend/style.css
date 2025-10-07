@@ -1,0 +1,78 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+
+.btn-outline-secondary {
+    border-radius: 20px;
+    padding: 5px 15px;
+    font-size: 0.9em;
+}
+
+.display-4 {
+    font-weight: bold;
+    color: #ff6b00;
+}
+
+#qrcode {
+    display: inline-block;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    border: 2px dashed #007bff;
+}
+
+.transaction-item {
+    background: #f8f9fa;
+    border-left: 4px solid #28a745 !important;
+}
+
+.badge {
+    font-size: 0.7em;
+}
+
+/* Animation cho logout */
+#logoutSection {
+    transition: all 0.3s ease;
+}
+
+/* Thêm style cho partner và admin */
+.scan-item {
+    background: #f8fff8;
+    border-radius: 5px;
+}
+
+.partner-card {
+    transition: all 0.3s ease;
+}
+
+.partner-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+}

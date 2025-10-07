@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nha Trang Rewards</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Header -->
+        <div class="text-center mb-4">
+            <h1 class="text-primary">🏝️ Nha Trang Rewards</h1>
+            <p class="text-muted">Mua 1 lần - Nhận quà nhiều lần • Công nghệ Hedera</p>
+        </div>
+
+        <!-- Nút Logout (chỉ hiện khi đã login) -->
+        <div id="logoutSection" class="text-end mb-3" style="display: none;">
+            <button class="btn btn-outline-secondary btn-sm" onclick="logout()">🚪 Thoát</button>
+        </div>
+
+        <!-- Form Đăng ký/Đăng nhập -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div id="loginSection">
+                    <h5>Đăng nhập bằng SĐT</h5>
+                    <div class="mb-3">
+                        <input type="tel" class="form-control" id="phoneNumber" placeholder="Số điện thoại">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="password" placeholder="Mật khẩu">
+                    </div>
+                    <button class="btn btn-primary w-100" onclick="login()">Đăng nhập</button>
+                    <button class="btn btn-link w-100" onclick="showRegister()">Chưa có tài khoản? Đăng ký</button>
+                </div>
+
+                <div id="registerSection" style="display: none;">
+                    <h5>Đăng ký tài khoản mới</h5>
+                    <div class="mb-3">
+                        <input type="tel" class="form-control" id="regPhone" placeholder="Số điện thoại">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" id="regPassword" placeholder="Mật khẩu">
+                    </div>
+                    <button class="btn btn-success w-100" onclick="register()">Đăng ký ngay</button>
+                    <button class="btn btn-link w-100" onclick="showLogin()">Đã có tài khoản? Đăng nhập</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard sau login -->
+        <div id="dashboard" class="card shadow-sm" style="display: none;">
+            <div class="card-body text-center">
+                <h4>💰 Điểm thưởng của bạn</h4>
+                <div class="display-4 text-warning" id="pointsDisplay">0</div>
+                <p class="text-muted">điểm (1 điểm = 1,000 VND)</p>
+                <div id="hederaInfo" class="mt-3">
+                    <small class="text-success">✅ Đã kết nối Hedera Testnet</small>
+                    <br>
+                    <small id="accountId" class="text-muted"></small>
+                </div>
+            </div>
+        </div>
+
+        <!-- QR Code Section -->
+        <div class="card shadow-sm mt-4">
+            <div class="card-body text-center">
+                <h5>📱 Quét QR Nhận Điểm</h5>
+                <div id="qrcode" class="mb-3" style="min-height: 200px; display: flex; justify-content: center; align-items: center; border: 1px dashed #ddd; border-radius: 10px;">
+                    <span class="text-muted">QR code sẽ xuất hiện ở đây</span>
+                </div>
+                <button class="btn btn-outline-primary mb-2" onclick="generateQR()">Tạo QR Mới</button>
+                <br>
+                <button class="btn btn-success btn-sm" onclick="addDemoPoints()">🎁 Demo: Thêm 10 điểm (Testnet)</button>
+            </div>
+        </div>
+
+        <!-- Hedera Transactions -->
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                <h5>🔗 Lịch sử Hedera Testnet</h5>
+                <div id="transactionsList">
+                    <p class="text-muted">Chưa có giao dịch nào</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load QRCode.js từ CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
