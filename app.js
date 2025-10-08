@@ -18,7 +18,7 @@ function showLogin() {
 // Dynamic API Base URL for Production
 const API_BASE = window.location.hostname === 'localhost' 
     ? 'http://localhost:3001'
-    : 'https://nhatrang-backend.railway.app';  // URL backend production
+    : 'nhatrang-backend-production.up.railway.app';  // URL backend production
 
     
 async function register() {
