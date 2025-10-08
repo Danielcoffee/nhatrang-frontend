@@ -18,8 +18,8 @@ function showLogin() {
 // Dynamic API Base URL for Production
 const API_BASE = window.location.hostname === 'localhost' 
     ? 'http://localhost:3001'
-    : 'https://nhatrang-backend-production.up.railway.app';  // URL backend production
-
+    : 'https://corsproxy.io/?https://nhatrang-backend-production.up.railway.app';
+    
     
 async function register() {
     const phone = document.getElementById('regPhone').value;
@@ -31,13 +31,13 @@ async function register() {
     }
 
     try {
-        // Gọi backend API thật
-        const response = await fetch(`${API_BASE}/api/register`, {
+        const response = await fetch('https://nhatrang-backend-production.up.railway.app/api/register', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
+            mode: 'cors', // Thêm dòng này
             body: JSON.stringify({ 
                 phone: phone,
                 name: `Khách hàng ${phone}`
@@ -47,7 +47,6 @@ async function register() {
         const result = await response.json();
         
         if (result.success) {
-            // Lưu thông tin user với Hedera account THẬT
             currentUser = {
                 phone: phone,
                 password: password,
