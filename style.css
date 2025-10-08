@@ -66,13 +66,27 @@ body {
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
+
+/* QR Scanner Mobile Styles */
+#qrScannerOverlay {
+    touch-action: none; /* Ngăn scroll khi scan */
+    -webkit-user-select: none; /* Ngăn select text trên iOS */
+    user-select: none;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
-    .container {
+    #qrScannerOverlay {
         padding: 10px;
     }
     
-    .card-body {
-        padding: 15px;
+    #qrScannerOverlay video {
+        height: 300px !important;
+    }
+    
+    #qrScannerOverlay button {
+        padding: 15px 20px !important;
+        font-size: 16px !important;
+        min-height: 50px;
     }
 }
