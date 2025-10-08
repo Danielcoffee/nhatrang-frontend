@@ -1,4 +1,9 @@
 // qr-scanner.js - Mobile QR Scanner cho Đối tác
+const API_BASE = window.API_BASE || 
+                 (window.location.hostname === 'localhost' 
+                   ? 'http://localhost:3001' 
+                   : 'https://nhatrang-backend-production.up.railway.app');
+
 class QRScanner {
     constructor() {
         this.isScanning = false;
