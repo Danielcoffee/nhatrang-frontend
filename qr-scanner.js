@@ -183,38 +183,76 @@ class QRScanner {
 
     // Thêm điểm cho khách hàng
     async addPointsToCustomer(phone) {
+    try {
+        console.log(`🎯 Xử lý SĐT: ${phone}`);
+        
+        // 🔧 GỌI API MỚI - THÊM ĐIỂM THEO SĐT
+        const response = await fetch(`${API_BASE}/api/add-points-to-phone`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ 
+                phone: phone,
+                points: 10,
+                partnerId: 'qr_scanner'
+            })
+        });
+
+        const result = await response.json();
+        
+        if (result.success) {
+            alert(`✅ Đã thêm 10 điểm cho ${phone}!\nTổng điểm: ${result.user.points}`);
+            
+            // Reload partner dashboard
+            if (typeof loadPartnerData === 'function') {
+                loadPartnerData();
+            }
+        } else {
+            // 🔧 NẾU USER CHƯA TỒN TẠI, ĐĂNG KÝ MỚI
+            if (result.message.includes('Không tìm thấy user')) {
+                console.log('🆕 User chưa tồn tại, đang đăng ký...');
+                await this.registerNewCustomer(phone);
+            } else {
+                throw new Error(result.message);
+            }
+        }
+        
+    } catch (error) {
+        console.error('❌ Add points error:', error);
+        this.showError('Lỗi thêm điểm: ' + error.message);
+    }
+}
+
+// 🔧 FUNCTION ĐĂNG KÝ USER MỚI
+    async registerNewCustomer(phone) {
         try {
-            // Gọi API backend
-            const response = await fetch(`${API_BASE}/api/add-points`, {
+            const response = await fetch(`${API_BASE}/api/register`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
                 body: JSON.stringify({ 
-                    userAccountId: `0.0.${Math.floor(1000000 + Math.random() * 9000000)}`, // Tạm thời
-                    points: 10,
-                    partnerId: 'qr_scanner'
+                    phone: phone,
+                    name: `Khách hàng ${phone}`
                 })
             });
 
             const result = await response.json();
             
             if (result.success) {
-                alert(`✅ Đã thêm 10 điểm cho ${phone}!`);
-                // Reload partner dashboard
-                if (typeof loadPartnerData === 'function') {
-                    loadPartnerData();
-                }
+                alert(`✅ Đã đăng ký thành công!\n📱 ${phone}\n💰 +${result.welcomeBonus} điểm\n🔑 ${result.user.hederaAccountId}`);
+                if (typeof loadPartnerData === 'function') loadPartnerData();
             } else {
                 throw new Error(result.message);
             }
-            
         } catch (error) {
-            console.error('❌ Add points error:', error);
-            this.showError('Lỗi thêm điểm: ' + error.message);
+            this.showError('Lỗi đăng ký: ' + error.message);
         }
     }
+
 
     // Fallback: Nhập tay
     fallbackToManualInput() {
